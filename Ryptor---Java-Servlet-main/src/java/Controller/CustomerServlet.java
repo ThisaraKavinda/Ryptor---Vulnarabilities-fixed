@@ -141,7 +141,7 @@ public class CustomerServlet extends HttpServlet {
     private void updateCustomer(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         
-        	String csrfCookie = null;
+        String csrfCookie = null;
 	for (Cookie cookie : request.getCookies()) {
 		if (cookie.getName().equals("csrf")) {
 			csrfCookie = cookie.getValue();
