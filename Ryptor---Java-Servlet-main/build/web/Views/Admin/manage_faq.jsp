@@ -4,6 +4,9 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -45,13 +48,13 @@
                                         <form action="faqUpdate" method="post">
                                             <%}%>
                                             <%if (request.getAttribute("editFAQ") != null) {%>
-                                            <input type="hidden"  name="id" value="${editFAQ.id}" >
+                                            <input type="hidden"  name="id" value="${fn:escapeXml(editFAQ.id)}" >
                                             <%}%>
 
                                             <div class="mb-3">
                                                 <label class="form-label">Question</label>
                                                 <%if (request.getAttribute("editFAQ") != null) {%>
-                                                <textarea class="form-control" placeholder="Textarea" rows="2"  name="question" >${editFAQ.question}</textarea>
+                                                <textarea class="form-control" placeholder="Textarea" rows="2"  name="question" >${fn:escapeXml(editFAQ.question)}</textarea>
                                                 <%} else {%>
                                                 <textarea class="form-control" placeholder="Textarea" rows="2"  name="question" ></textarea>
                                                 <%}%>
@@ -61,7 +64,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Answer</label>
                                                 <%if (request.getAttribute("editFAQ") != null) {%>
-                                                <textarea class="form-control" placeholder="Textarea" rows="2"  name="answer" >${editFAQ.answer}</textarea>
+                                                <textarea class="form-control" placeholder="Textarea" rows="2"  name="answer" >${fn:escapeXml(editFAQ.answer)}</textarea>
                                                 <%} else {%>
                                                 <textarea class="form-control" placeholder="Textarea" rows="2"  name="answer" ></textarea>
                                                 <%}%>
@@ -82,13 +85,13 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-11">
-                                            <h4 class="tab-title" style="margin-top: 20px"><%=faq.getQuestion()%></h4>
-                                            <p><%=faq.getAnswer()%>
+                                            <h4 class="tab-title" style="margin-top: 20px"><c:out value="${faq.getQuestion()}"/></h4>
+                                            <p><c:out value="${faq.getAnswer()}"/>
                                             </p>
                                         </div>
                                         <div class="col-md-1">
-                                            <a href="faqEdit?id=<%=faq.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                            <a href="faqDelete?id=<%=faq.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                            <a href="faqEdit?id=<c:out value="${faq.getId()}"/>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
+                                            <a href="faqDelete?id=<c:out value="${faq.getId()}"/>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
                                         </div>
                                     </div>
                                 </div>

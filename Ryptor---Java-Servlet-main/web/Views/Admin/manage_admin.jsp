@@ -7,6 +7,9 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -53,18 +56,18 @@
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Name</label>
-                                                    <input type="text" class="form-control"   value="${editAdmin.name}" id="name" name="name" >
+                                                    <input type="text" class="form-control"   value="${fn:escapeXml(editAdmin.name)}" id="name" name="name" >
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputPassword4">Email</label>
-                                                    <input type="email" class="form-control" value="${editAdmin.email}"  id="email" name="email">
+                                                    <input type="email" class="form-control" value="${fn:escapeXml(editAdmin.email)}"  id="email" name="email">
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputAddress">NIC</label>
-                                                    <input type="text" class="form-control" id="nic" value="${editAdmin.nic}" name="nic">
+                                                    <input type="text" class="form-control" id="nic" value="${fn:escapeXml(editAdmin.nic)}" name="nic">
 
                                                 </div>
 
@@ -93,8 +96,8 @@
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Password</label>
-                                                    <input type="hidden"  id="admin-id" name="id" value="${editAdmin.id}" >
-                                                    <input type="test" class="form-control" id="password-admin" name="password" value="${editAdmin.password}">
+                                                    <input type="hidden"  id="admin-id" name="id" value="${fn:escapeXml(editAdmin.id)}" >
+                                                    <input type="test" class="form-control" id="password-admin" name="password" value="${fn:escapeXml(editAdmin.password)}">
                                                 </div>
                                             </div>
                                             <%}%>
@@ -137,19 +140,19 @@
                                                 for (Admin admin : adminList) {%>
 
                                             <tr>
-                                                <td><%=admin.getId()%></td>
+                                                <td><c:out value="${admin.getId()}"/></td>
                                                 <%if (admin.getImage() == null) {%>
-                                                <td><img src="img/defult_avatar.jpg" class="rounded-circle me-2" alt="Avatar" width="48" height="48"><%=admin.getName()%></td>
+                                                <td><img src="img/defult_avatar.jpg" class="rounded-circle me-2" alt="Avatar" width="48" height="48"><c:out value="${admin.getName()}"/></td>
                                                     <%} else {%>
-                                                <td><img src="<%=CommonConstant.ADMIN_DRI + admin.getImage()%>" class="rounded-circle me-2" alt="Avatar" width="48" height="48"><%=admin.getName()%></td>
+                                                <td><img src="<c:out value="${CommonConstant.ADMIN_DRI + admin.getImage()}"/>" class="rounded-circle me-2" alt="Avatar" width="48" height="48"><c:out value="${admin.getName()}"/></td>
                                                     <%}%>
-                                                <td><%=admin.getNic()%></td>
-                                                <td><%=admin.getEmail()%></td>
-                                                <td><%=admin.getPassword()%></td>
-                                                <td><%=admin.getBranchId()%></td>
+                                                <td><c:out value="${admin.getNic()}"/></td>
+                                                <td><c:out value="${admin.getEmail()}"/></td>
+                                                <td><c:out value="${admin.getPassword()}"/></td>
+                                                <td><c:out value="${admin.getBranchId()}"/></td>
                                                 <td class="table-action">
-                                                    <a href="adminEdit?id=<%=admin.getId()%>"  style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                                    <a  class="delete-admin" delete-id="<%=admin.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                                    <a href="adminEdit?id=<c:out value="${admin.getId()}"/>"  style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
+                                                    <a  class="delete-admin" delete-id="<c:out value="${admin.getId()}"/>%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                             <%}%>

@@ -2,6 +2,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
    <head>
        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -46,11 +50,11 @@
                                             <%}%>
                                             <div class="row">
                                                 <%if (request.getAttribute("editServicesType") != null) {%>
-                                                <input type="hidden" class="form-control"  value="${editServicesType.id}" name="id" >
+                                                <input type="hidden" class="form-control"  value="${fn:escapeXml(editServicesType.id)}" name="id" >
                                                 <%}%>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Service Type Name</label>
-                                                    <input type="text" class="form-control"  value="${editServicesType.name}" name="name" >
+                                                    <input type="text" class="form-control"  value="${fn:escapeXml(editServicesType.name)}" name="name" >
                                                 </div>
                                                
                                             </div>
@@ -88,8 +92,8 @@
                                                 <td><%=servicesType.getId()%></td>
                                                 <td><%=servicesType.getName()%></td>
                                                 <td class="table-action">
-                                                    <a href="servicesTypeEdit?id=<%=servicesType.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                                    <a href="servicesTypeDelete?id=<%=servicesType.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                                    <a href="servicesTypeEdit?id=<c:out value="${servicesType.getId()}"/>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
+                                                    <a href="servicesTypeDelete?id=<c:out value="${servicesType.getId()}"/>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                             <%}%>

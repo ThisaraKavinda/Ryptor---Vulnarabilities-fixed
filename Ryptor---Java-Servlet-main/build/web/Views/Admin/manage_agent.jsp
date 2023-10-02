@@ -7,6 +7,8 @@
 <%@page import="java.util.List"%>
 <%String AGENT_DRI = "img/agent/"; %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
    <head>
        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -52,18 +54,18 @@
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Name</label>
-                                                    <input type="text" class="form-control"   value="${editAgent.name}" name="name" >
+                                                    <input type="text" class="form-control"   value="${fn:escapeXml(editAgent.name)}" name="name" >
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputPassword4">Email</label>
-                                                    <input type="email" class="form-control" id="inputPassword4"  value="${editAgent.email}"  name="email">
+                                                    <input type="email" class="form-control" id="inputPassword4"  value="${fn:escapeXml(editAgent.email)}"  name="email">
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputAddress">NIC</label>
-                                                    <input type="text" class="form-control" id="inputAddress"  value="${editAgent.nic}" name="nic">
+                                                    <input type="text" class="form-control" id="inputAddress"  value="${fn:escapeXml(editAgent.nic)}" name="nic">
 
                                                 </div>
                                                 <div class="mb-3 col-md-6">
@@ -90,8 +92,8 @@
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Password</label>
-                                                    <input type="hidden"  name="id" value="${editAgent.id}" >
-                                                    <input type="test" class="form-control" name="password" value="${editAgent.password}">
+                                                    <input type="hidden"  name="id" value="${fn:escapeXml(editAgent.id)}" >
+                                                    <input type="test" class="form-control" name="password" value="${fn:escapeXml(editAgent.password)}">
                                                 </div>
                                             </div>
                                             <%}%>
@@ -132,19 +134,19 @@
                                                 for (Agent agent : agentList) {%>
 
                                             <tr>
-                                                <td><%=agent.getId()%></td>
+                                                <td><c:out value="${agent.getId()}"/></td>
                                                   <%if(agent.getImage() == null){%>
-                                                    <td><img src="img/defult_avatar.jpg" class="rounded-circle me-2" alt="Avatar" width="48" height="48"><%=agent.getName()%></td>
+                                                    <td><img src="img/defult_avatar.jpg" class="rounded-circle me-2" alt="Avatar" width="48" height="48"><c:out value="${agent.getName()}"/></td>
                                                  <%} else {%>
-                                                    <td><img src="<%=AGENT_DRI+agent.getImage()%>" class="rounded-circle me-2" alt="Avatar" width="48" height="48"><%=agent.getName()%></td>
+                                                    <td><img src="<c:out value="${AGENT_DRI+agent.getImage()}"/>" class="rounded-circle me-2" alt="Avatar" width="48" height="48"><c:out value="${agent.getName()}"/></td>
                                                  <%}%>
-                                                <td><%=agent.getNic()%></td>
-                                                <td><%=agent.getEmail()%></td>
-                                                <td><%=agent.getPassword()%></td>
-                                                <td><%=agent.getBranchId()%></td>
+                                                <td><c:out value="${agent.getNic()}"/></td>
+                                                <td><c:out value="${agent.getEmail()}"/></td>
+                                                <td><c:out value="${agent.getPassword()}"/></td>
+                                                <td><c:out value="${agent.getBranchId()}"/></td>
                                                 <td class="table-action">
-                                                    <a href="agentEdit?id=<%=agent.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                                    <a href="agentDelete?id=<%=agent.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                                    <a href="agentEdit?id=<c:out value="${agent.getId()}"/>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
+                                                    <a href="agentDelete?id=<c:out value="${agent.getId()}"/> style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                             <%}%>
