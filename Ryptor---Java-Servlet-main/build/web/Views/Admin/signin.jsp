@@ -7,7 +7,7 @@
         <title>Sign in</title>
 
         <link href="css/modern.css" rel="stylesheet" type="text/css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.css" integrity="sha512-f8gN/IhfI+0E9Fc/LKtjVq4ywfhYAVeMGKsECzDUHcFJ5teVwvKTqizm+5a84FINhfrgdvjX8hEJbem2io1iTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="css/sweetalert.css" type="text/css"/>
 
     </head>
     <!--img/logo/admin.png-->
@@ -174,6 +174,7 @@
                         dataType: "json",
                         //if received a response from the server
                         success: function (result) {
+                            console.log(result);
 
                             if (result.status == "fail") {
                                 swal({
