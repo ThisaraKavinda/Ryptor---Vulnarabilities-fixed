@@ -1,3 +1,4 @@
+<%@page import="ControllerHelper.CSRF"%>
 <%@page import="Model.Customer"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -5,6 +6,12 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<%
+String csrfToken = CSRF.getToken();
+javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie("csrf", csrfToken);
+response.addCookie(cookie);
+%>
 
 
 <%String id = (String) session.getAttribute("USER_ID");%>
@@ -49,6 +56,7 @@
                                         <%if (request.getAttribute("editCustomer") != null) {%>
                                         <form action="customerUpdate" method="post">
                                             <%}%>
+                                            <input type="hidden" name="csrfToken" value="<%= csrfToken %>"/>
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Name</label>
