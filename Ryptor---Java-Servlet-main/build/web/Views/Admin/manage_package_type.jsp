@@ -2,6 +2,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
    <head>
        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -46,11 +50,11 @@
                                             <%}%>
                                             <div class="row">
                                                 <%if (request.getAttribute("editPackageType") != null) {%>
-                                                <input type="hidden" class="form-control"  value="${editPackageType.id}" name="id" >
+                                                <input type="hidden" class="form-control"  value="${fn:escapeXml(editPackageType.id)}" name="id" >
                                                 <%}%>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Package Type Name</label>
-                                                    <input type="text" class="form-control"  value="${editPackageType.name}" name="name" >
+                                                    <input type="text" class="form-control"  value="${fn:escapeXml(editPackageType.name)}" name="name" >
                                                 </div>
                                                
                                             </div>
@@ -85,11 +89,11 @@
                                                 for (PackageType packageType : packageTypeList) {%>
 
                                             <tr>
-                                                <td><%=packageType.getId()%></td>
-                                                <td><%=packageType.getName()%></td>
+                                                <td><c:out value="${packageType.getId()}"/></td>
+                                                <td><c:out value="${packageType.getName()}"/></td>
                                                 <td class="table-action">
-                                                    <a href="packageTypeEdit?id=<%=packageType.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                                    <a href="packageTypeDelete?id=<%=packageType.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                                    <a href="packageTypeEdit?id=<c:out value="${packageType.getId()}"/>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
+                                                    <a href="packageTypeDelete?id=<c:out value="${packageType.getId()}"/>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                             <%}%>

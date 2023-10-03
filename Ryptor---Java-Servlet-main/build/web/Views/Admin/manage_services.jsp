@@ -7,6 +7,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%String id = (String) session.getAttribute("USER_ID");%>
 <%String userType = (String) session.getAttribute("USER_TYPE");%>
 <html>
@@ -50,13 +54,13 @@
                                         <form action="servicesUpdate" method="post">
                                             <%}%>
                                             <%if (request.getAttribute("editServices") != null) {%>
-                                            <input type="hidden"  name="id" value="${editServices.id}" >
+                                            <input type="hidden"  name="id" value="${fn:escapeXml(editServices.id)}" >
                                             <%}%>
 
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Service Name</label>
-                                                    <input type="text" class="form-control"   value="${editServices.name}" name="name" >
+                                                    <input type="text" class="form-control"   value="${fn:escapeXml(editServices.name)}" name="name" >
                                                 </div>
                                                   <div class="mb-3 col-md-6">
                                                     <label for="inputState">Service Type</label>
@@ -65,12 +69,12 @@
                                                         <% for (ServicesType servicesType : servicesTypeList) {%>
                                                             <%if (ServicesHelper.SERVICETYPE != null) {%>
                                                                 <%if (ServicesHelper.SERVICETYPE.equals(servicesType.getName())) {%>
-                                                                    <option selected="" value="<%=servicesType.getId()%>"><%=servicesType.getName()%></option> 
+                                                                    <option selected="" value="${fn:escapeXml(servicesType.getId())}"><%=servicesType.getName()%></option> 
                                                                 <%} else {%>
-                                                                    <option  value="<%=servicesType.getId()%>"><%=servicesType.getName()%></option> 
+                                                                    <option  value="${fn:escapeXml(servicesType.getId())}"><%=servicesType.getName()%></option> 
                                                                 <%}%>
                                                             <%} else {%>
-                                                                   <option  value="<%=servicesType.getId()%>"><%=servicesType.getName()%></option> 
+                                                                   <option  value="${fn:escapeXml(servicesType.getId())}"><%=servicesType.getName()%></option> 
                                                             <%}%>
                                                         <%}%>
                                                     </select>
@@ -80,7 +84,7 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Description</label>
                                                 <%if (request.getAttribute("editServices") != null) {%>
-                                                <textarea class="form-control" placeholder="Textarea" rows="2"  name="description" >${editServices.description}</textarea>
+                                                <textarea class="form-control" placeholder="Textarea" rows="2"  name="description" >${fn:escapeXml(editServices.description)}</textarea>
                                                 <%} else {%>
                                                 <textarea class="form-control" placeholder="Textarea" rows="2"  name="description" ></textarea>
                                                 <%}%>
@@ -121,14 +125,14 @@
                                                 for (Services services : servicesList) {%>
 
                                             <tr>
-                                                <td><%=services.getId()%></td>
-                                                <td><%=services.getName()%></td>
-                                                <td><%=services.getDescription()%></td>
-                                                <td><%=services.getServicetype_id()%></td>
+                                                <td><c:out value="${services.getId()}"/></td>
+                                                <td><c:out value="${services.getName()}"/></td>
+                                                <td><c:out value="${services.getDescription()}"/></td>
+                                                <td><c:out value="${services.getServicetype_id()}"/></td>
                                                 <%if ("admin".equals(userType) || "manager".equals(userType)) {%>
                                                 <td class="table-action">
-                                                    <a href="servicesEdit?id=<%=services.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                                    <a href="servicesDelete?id=<%=services.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                                    <a href="servicesEdit?id=<c:out value="${services.getId()}"/>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
+                                                    <a href="servicesDelete?id=<c:out value="${services.getId()}"/>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
                                                 </td>
                                                  <%}%>
                                             </tr>

@@ -2,6 +2,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -46,15 +50,15 @@
                                             <%}%>
                                             <div class="row">
                                                 <%if (request.getAttribute("editBranch") != null) {%>
-                                                <input type="hidden" class="form-control"  value="${editBranch.id}" name="id" >
+                                                <input type="hidden" class="form-control"  value="${fn:escapeXml(editBranch.id)}" name="id" >
                                                 <%}%>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Branch Name</label>
-                                                    <input type="text" class="form-control"  value="${editBranch.name}" name="name" >
+                                                    <input type="text" class="form-control"  value="${fn:escapeXml(editBranch.name)}" name="name" >
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputPassword4">Branch Location</label>
-                                                    <input type="text" class="form-control"  value="${editBranch.location}"  name="location">
+                                                    <input type="text" class="form-control"  value="${fn:escapeXml(editBranch.location)}"  name="location">
                                                 </div>
                                             </div>
 
@@ -89,12 +93,12 @@
                                                 for (Branch branch : branchList) {%>
 
                                             <tr>
-                                                <td><%=branch.getId()%></td>
-                                                <td><%=branch.getName()%></td>
-                                                <td><%=branch.getLocation()%></td>
+                                                <td><c:out value="${branch.getId()}"/></td>
+                                                <td><c:out value="${branch.getName()}"/></td>
+                                                <td><c:out value="${branch.getLocation()}"/></td>
                                                 <td class="table-action">
-                                                    <a href="branchEdit?id=<%=branch.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                                    <a href="branchDelete?id=<%=branch.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                                    <a href="branchEdit?id=<c:out value="${branch.getId()}"/>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
+                                                    <a href="branchDelete?id=<c:out value="${branch.getId()}"/>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                             <%}%>

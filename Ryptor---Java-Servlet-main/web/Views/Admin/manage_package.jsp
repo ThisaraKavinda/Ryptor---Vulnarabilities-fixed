@@ -4,6 +4,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%String id = (String) session.getAttribute("USER_ID");%>
 <%String userType = (String) session.getAttribute("USER_TYPE");%>
 <html>
@@ -47,17 +51,17 @@
                                         <form action="packageUpdate" method="post">
                                             <%}%>
                                             <%if (request.getAttribute("editPackage") != null) {%>
-                                            <input type="hidden"  name="id" value="${editPackage.id}" >
+                                            <input type="hidden"  name="id" value="${fn:escapeXml(editPackage.id)}" >
                                             <%}%>
 
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Name</label>
-                                                    <input type="text" class="form-control"   value="${editPackage.name}" name="name" >
+                                                    <input type="text" class="form-control"   value="${fn:escapeXml(editPackage.name)}" name="name" >
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Price</label>
-                                                    <input type="text" class="form-control"    value="${editPackage.price}"  name="price">
+                                                    <input type="text" class="form-control"    value="${fn:escapeXml(editPackage.price)}"  name="price">
                                                 </div>
                                             </div>
 
@@ -74,17 +78,17 @@
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Any Time Data</label>
-                                                    <input type="text" class="form-control"  value="${editPackage.antData}" name="any_data" >
+                                                    <input type="text" class="form-control"  value="${fn:escapeXml(editPackage.antData)}" name="any_data" >
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputPassword4">Night Time Data</label>
-                                                    <input type="text" class="form-control"   value="${editPackage.nigthtData}"  name="night_data">
+                                                    <input type="text" class="form-control"   value="${fn:escapeXml(editPackage.nigthtData)}"  name="night_data">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Validity Period</label>
-                                                    <input type="text" class="form-control"   value="${editPackage.validityPeriod}" name="validity_period" >
+                                                    <input type="text" class="form-control"   value="${fn:escapeXml(editPackage.validityPeriod)}" name="validity_period" >
                                                 </div>
 
                                                 <div class="mb-3 col-md-6">
@@ -148,18 +152,18 @@
                                                 for (Packages packages : packageList) {%>
 
                                             <tr>
-                                                <td><%=packages.getId()%></td>
-                                                <td><%=packages.getName()%></td>
-                                                <td><%=packages.getDescription()%></td>
-                                                <td><%=packages.getPrice()%></td>
-                                                <td><%=packages.getValidityPeriod()%></td>
-                                                <td><%=packages.getAntData()%></td>
-                                                <td><%=packages.getNigthtData()%></td>
-                                                <td><%=packages.getPackageType()%></td>
+                                                <td><c:out value="${packages.getId()}"/></td>
+                                                <td><c:out value="${packages.getName()}"/></td>
+                                                <td><c:out value="${packages.getDescription()}"/></td>
+                                                <td><c:out value="${packages.getPrice()}"/></td>
+                                                <td><c:out value="${packages.getValidityPeriod()}"/></td>
+                                                <td><c:out value="${packages.getAntData()}"/></td>
+                                                <td><c:out value="${packages.getNigthtData()}"/></td>
+                                                <td><c:out value="${packages.getPackageType()}"/></td>
                                                 <%if ("admin".equals(userType) || "manager".equals(userType)) {%>
                                                 <td class="table-action">
-                                                    <a href="packageEdit?id=<%=packages.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                                    <a href="packageDelete?id=<%=packages.getId()%>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                                                    <a href="packageEdit?id=<c:out value="${packages.getId()}"/>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
+                                                    <a href="packageDelete?id=<c:out value="${packages.getId()}"/>" style="margin-left: 8px"><i class="align-middle fas fa-fw fa-trash"></i></a>
                                                 </td>
                                                   <%}%>
                                             </tr>

@@ -3,6 +3,9 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <%String id = (String) session.getAttribute("USER_ID");%>
 <%String userType = (String) session.getAttribute("USER_TYPE");%>
 <html>
@@ -46,17 +49,17 @@
                                             <%}%>
 
                                             <%if (request.getAttribute("editSim") != null) {%>
-                                            <input type="hidden" class="form-control"  value="${editSim.id}" name="id" >
+                                            <input type="hidden" class="form-control"  value="${fn:escapeXml(editSim.id)}" name="id" >
                                             <%}%>
 
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">SIM Number</label>
-                                                    <input type="text" class="form-control"  value="${editSim.simNumber}" name="number" >
+                                                    <input type="text" class="form-control"  value="${fn:escapeXml(editSim.simNumber)}" name="number" >
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputPassword4">Customer NIC</label>
-                                                    <input type="text" class="form-control"  value="${editSim.customerNIC}"  name="nic">
+                                                    <input type="text" class="form-control"  value="${fn:escapeXml(editSim.customerNIC)}"  name="nic">
                                                 </div>
                                             </div>
 
@@ -93,9 +96,9 @@
                                                 for (Sim sim : simList) {%>
 
                                             <tr>
-                                                <td><%=sim.getId()%></td>
-                                                <td><%=sim.getSimNumber()%></td>
-                                                <td><%=sim.getCustomerNIC()%></td>
+                                                <td><c:out value="${sim.getId()}"/></td>
+                                                <td><c:out value="${sim.getSimNumber()}"/></td>
+                                                <td><c:out value="${sim.getCustomerNIC()}"/></td>
                                                 <%if (sim.getStatus() == 1) {%>
                                                 <td><div class="small"><span class="fas fa-circle chat-online" style="margin-right: 5px"></span> Active</div></td>
                                                 <%} else {%>
