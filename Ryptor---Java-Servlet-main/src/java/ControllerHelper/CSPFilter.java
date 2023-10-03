@@ -29,6 +29,8 @@ public class CSPFilter implements Filter {
                              FilterChain chain) throws IOException, ServletException {
             if (response instanceof HttpServletResponse) {
                     ((HttpServletResponse)response).setHeader("Content-Security-Policy", CSPFilter.POLICY);
+                    ((HttpServletResponse)response).setHeader("Access-Control-Allow-Origin","http://localhost:8080");
+                    ((HttpServletResponse)response).setHeader("X-Frame-Options","deny");
                     chain.doFilter(request, response);
             }
         }
