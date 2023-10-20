@@ -1,3 +1,4 @@
+<%@page import="ControllerHelper.CSRF"%>
 <%@page import="ControllerHelper.AgentHelper"%>
 <%@page import="Model.Agent"%>
 <%@page import="Model.Branch"%>
@@ -7,6 +8,16 @@
 <%@page import="java.util.List"%>
 <%String AGENT_DRI = "img/agent/"; %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+<%
+String csrfToken = CSRF.getToken();
+javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie("csrf", csrfToken);
+response.addCookie(cookie);
+%>
+
 <html>
    <head>
        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -49,21 +60,22 @@
                                         <%if (request.getAttribute("editAgent") != null) {%>
                                         <form action="agentUpdate" method="post">
                                             <%}%>
+                                            <input type="hidden" name="csrfToken" value="<%= csrfToken %>"/>
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Name</label>
-                                                    <input type="text" class="form-control"   value="${editAgent.name}" name="name" >
+                                                    <input type="text" class="form-control"   value="${fn:escapeXml(editAgent.name)}" name="name" >
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputPassword4">Email</label>
-                                                    <input type="email" class="form-control" id="inputPassword4"  value="${editAgent.email}"  name="email">
+                                                    <input type="email" class="form-control" id="inputPassword4"  value="${fn:escapeXml(editAgent.email)}"  name="email">
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputAddress">NIC</label>
-                                                    <input type="text" class="form-control" id="inputAddress"  value="${editAgent.nic}" name="nic">
+                                                    <input type="text" class="form-control" id="inputAddress"  value="${fn:escapeXml(editAgent.nic)}" name="nic">
 
                                                 </div>
                                                 <div class="mb-3 col-md-6">
@@ -91,7 +103,7 @@
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Password</label>
                                                     <input type="hidden"  name="id" value="${editAgent.id}" >
-                                                    <input type="test" class="form-control" name="password" value="${editAgent.password}">
+                                                    <input type="test" class="form-control" name="password" value="${fn:escapeXml(editAgent.password)}">
                                                 </div>
                                             </div>
                                             <%}%>
