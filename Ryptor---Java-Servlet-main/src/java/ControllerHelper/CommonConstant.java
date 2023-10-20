@@ -6,16 +6,16 @@ public final class CommonConstant {
     // public static final String CATALINA = System.getProperty("catalina.base");
     
     // Constant for file path of Query.xml
-    public static final String QUERY_XML_FILE_PATH = "D:\\Education\\Mine\\Web developing\\New folder\\Ryptor---Java-Servlet-main\\Ryptor---Java-Servlet-main\\web\\WEB-INF\\Query.xml";
+    public static final String QUERY_XML_FILE_PATH = "E:\\GitHub\\Ryptor---Vulnarabilities-fixed\\Ryptor---Java-Servlet-main\\web\\WEB-INF\\Query.xml";
     
     // Constant for loggre.log folder path with logger file
-    public static final String LOGGER_DRI = "D:\\Education\\Mine\\Web developing\\New folder\\Ryptor---Java-Servlet-main\\Ryptor---Java-Servlet-main\\web\\logger\\loggre.log";
+    public static final String LOGGER_DRI = "E:\\GitHub\\Ryptor---Vulnarabilities-fixed\\Ryptor---Java-Servlet-main\\web\\logger\\loggre.log";
     
     // Constant for admin image uploard folder
-    public static final String ADMIN_IMAGE_UPLOAD_DIR = "D:\\Education\\Mine\\Web developing\\New folder\\Ryptor---Java-Servlet-main\\Ryptor---Java-Servlet-main\\web\\img\\admin";
+    public static final String ADMIN_IMAGE_UPLOAD_DIR = "E:\\GitHub\\Ryptor---Vulnarabilities-fixed\\Ryptor---Java-Servlet-main\\web\\img\\admin";
     
     // Constant for agent image uploard folder
-    public static final String AGENT_IMAGE_UPLOAD_DIR = "D:\\Education\\Mine\\Web developing\\New folder\\Ryptor---Java-Servlet-main\\Ryptor---Java-Servlet-main\\web\\img\\agent";
+    public static final String AGENT_IMAGE_UPLOAD_DIR = "E:\\GitHub\\Ryptor---Vulnarabilities-fixed\\Ryptor---Java-Servlet-main\\web\\img\\agent";
     
     
     

@@ -1,3 +1,4 @@
+<%@page import="ControllerHelper.CSRF"%>
 <%@page import="ControllerHelper.CommonConstant"%>
 <%@page import="ControllerHelper.BranchHelper"%>
 <%@page import="Model.Admin"%>
@@ -7,6 +8,17 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%
+String csrfToken = CSRF.getToken();
+javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie("csrf", csrfToken);
+response.addCookie(cookie);
+%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -49,22 +61,23 @@
                                         <%}%>
                                         <%if (request.getAttribute("editAdmin") != null) {%>
                                         <form action="adminUpdate" method="post">
+                                            <input type="hidden" name="csrfToken" value="<%= csrfToken %>"/>
                                             <%}%>
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Name</label>
-                                                    <input type="text" class="form-control"   value="${editAdmin.name}" id="name" name="name" >
+                                                    <input type="text" class="form-control"   value="${fn:escapeXml(editAdmin.name)}" id="name" name="name" >
                                                 </div>
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputPassword4">Email</label>
-                                                    <input type="email" class="form-control" value="${editAdmin.email}"  id="email" name="email">
+                                                    <input type="email" class="form-control" value="${fn:escapeXml(editAdmin.email)}"  id="email" name="email">
                                                 </div>
                                             </div>
 
                                             <div class="row">
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputAddress">NIC</label>
-                                                    <input type="text" class="form-control" id="nic" value="${editAdmin.nic}" name="nic">
+                                                    <input type="text" class="form-control" id="nic" value="${fn:escapeXml(editAdmin.nic)}" name="nic">
 
                                                 </div>
 
@@ -94,7 +107,7 @@
                                                 <div class="mb-3 col-md-6">
                                                     <label for="inputEmail4">Password</label>
                                                     <input type="hidden"  id="admin-id" name="id" value="${editAdmin.id}" >
-                                                    <input type="test" class="form-control" id="password-admin" name="password" value="${editAdmin.password}">
+                                                    <input type="test" class="form-control" id="password-admin" name="password" value="${fn:escapeXml(editAdmin.password)}">
                                                 </div>
                                             </div>
                                             <%}%>
